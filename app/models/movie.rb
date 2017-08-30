@@ -29,6 +29,9 @@ class Movie < ActiveRecord::Base
 				if params.nil?
 					klass.public_send(method_name) 
 					# movie categories (popular, top rated, etc) do not take a movie ID input
+				elsif params.is_a?(Hash)
+					klass.public_send(method_name, params)
+					# sort_by requires a key and value
 				else
 					klass.public_send(method_name, params) 
 					# movie images (backdrops, posters) require movie ID
