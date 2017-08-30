@@ -1,0 +1,169 @@
+.category_titles {
+	position:relative;
+	overflow:hidden;
+}
+
+.category_titles p {
+	min-width: 100%;
+	background-color: #fff;
+	position:absolute;
+	top:15px;
+	padding-left:25px;
+	left:0px;
+
+	font-size:1.7vw;
+	color: #000;
+	font-weight:bold;
+}
+
+.category_titles img {
+	max-width: 100% !important;
+	-webkit-transition: all 0.75s ease; /* Safari and Chrome */
+    -moz-transition: all 0.75s ease; /* Firefox */
+    -ms-transition: all 0.75s ease; /* IE 9 */
+    -o-transition: all 0.75s ease; /* Opera */
+    transition: all 0.75s ease;
+}
+
+.category_titles:hover img {
+	-webkit-transform:scale(1.02); /* Safari and Chrome */
+    -moz-transform:scale(1.02); /* Firefox */
+    -ms-transform:scale(1.02); /* IE 9 */
+    -o-transform:scale(1.02); /* Opera */
+     transform:scale(1.02);
+}
+
+/* https://stackoverflow.com/questions/15757036/creating-a-zoom-effect-on-an-image-on-hover-using-css
+*/
+
+.placeholder_container {
+	height: 300px;
+	margin-top: 25px;
+	margin-bottom:45px;
+}
+
+.button_col {
+	display: flex !important;
+ 	justify-content: center !important;
+ 	padding-top: 20px;
+}
+
+.placeholder {
+	height:100%;
+	width: 100%;
+	background-color:#FAFAFA;
+	padding-left:40px !important;
+	padding-right: 40px !important;
+}
+
+.loader,
+.loader:before,
+.loader:after {
+  background: #64aff4;
+  -webkit-animation: load1 1s infinite ease-in-out;
+  animation: load1 1s infinite ease-in-out;
+  width: 1em;
+  height: 4em;
+}
+.loader {
+  color: #64aff4;
+  text-indent: -9999em;
+  margin: 88px auto;
+  position: relative;
+  font-size: 5px;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s;
+}
+.loader:before,
+.loader:after {
+  position: absolute;
+  top: 0;
+  content: '';
+}
+.loader:before {
+  left: -1.5em;
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s;
+}
+.loader:after {
+  left: 1.5em;
+}
+@-webkit-keyframes load1 {
+  0%,
+  80%,
+  100% {
+    box-shadow: 0 0;
+    height: 4em;
+  }
+  40% {
+    box-shadow: 0 -2em;
+    height: 5em;
+  }
+}
+@keyframes load1 {
+  0%,
+  80%,
+  100% {
+    box-shadow: 0 0;
+    height: 4em;
+  }
+  40% {
+    box-shadow: 0 -2em;
+    height: 5em;
+  }
+}
+
+/* load spinner source: https://projects.lukehaas.me/css-loaders/
+*/
+
+.movie_container:empty {
+	margin: auto;
+	width: 500px;
+	height: 600px; /* change height to see repeat-y behavior */
+
+	background-image:
+		radial-gradient( circle 50px at 50px 50px, lightgray 99%, transparent 0 ),
+		linear-gradient( 100deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0) 80% ),
+		linear-gradient( lightgray 20px, transparent 0 ),
+		linear-gradient( lightgray 20px, transparent 0 ),
+		linear-gradient( lightgray 20px, transparent 0 ),
+		linear-gradient( lightgray 20px, transparent 0 );
+
+	background-repeat: repeat-y;
+
+	background-size:
+		100px 200px, /* circle */
+		50px 200px, /* highlight */
+		150px 200px,
+		350px 200px,
+		300px 200px,
+		250px 200px;
+
+	background-position:
+		0 0, /* circle */
+		0 0, /* highlight */
+		120px 0,
+		120px 40px,
+		120px 80px,
+		120px 120px;
+
+	animation: shine 1s infinite;
+}
+
+@keyframes shine {
+	to {
+		background-position:
+			0 0,
+			100% 0, /* move highlight to right */
+			120px 0,
+			120px 40px,
+			120px 80px,
+			120px 120px;
+	}
+}
+
+/* loading skeleton source: https://codepen.io/oslego/pen/XdvWmd
+*/

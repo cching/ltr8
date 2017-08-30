@@ -1,0 +1,4 @@
+var replace_obj = $("#parallax_container");
+replace_obj.html("<%= escape_javascript(render 'home_now_playing') %>");
+$('.parallax').parallax();
+// replace home page now playing with partial, reinitialize parallax
