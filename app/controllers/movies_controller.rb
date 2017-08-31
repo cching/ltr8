@@ -27,6 +27,14 @@ class MoviesController < ApplicationController
   end
 
   def search
+    sort_by = ["title_sort", "release_date_sort"]
+    if params[:title].present?
+      @movies = Movie.define("search", "movie").results
+    elsif params[:movie].present? || sort_by.map {|x| params[x.to_sym]}.any?
+      sort_by.map{ |x| @sort ||= params[x.to_sym]}
+      params_hash = {:sort_by => @sort, :with_genres => "#{params[:movie][:genre_id].to_i if !params[:movie].nil?}"}
+      @movies = Movie.define("discover", "movie", params_hash)
+    end
   end
 
   def show

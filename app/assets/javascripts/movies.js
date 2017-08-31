@@ -1,7 +1,7 @@
 $(document).ready(function () {
     $('.parallax').parallax();
     // initiate intro now playing backdrop parallax on page load
-    $('select').material_select();
+    $('#genres').material_select();
     // initialize material form select
     $(document).on("scroll", onScroll);
     
@@ -22,25 +22,109 @@ $(document).ready(function () {
 			// kill loop after 20th iteration of now playing array
 		}
 	}
-  
+
+  $(".waves-effect").on("click", function(e) {
+    // on click function for title and release date sorting
+    var hidden_field = $('#' + e.target.id + '_sort');
+    removeSort(e.target.id);
+    e.target.blur();
+
+    if (hidden_field.val() == '') {
+      hidden_field.val(e.target.id + '.asc');
+      $('#' + e.target.id + '> :first-child').html("keyboard_arrow_down");
+      // if no sorting option, set to ascending first
+    } else {
+      try {
+        // try catch to prevent error if clicked before value is loaded too quicly
+        // if there is a value:
+
+        if (hidden_field.val().slice(-3) == "asc") {
+          hidden_field.val(e.target.id + '.desc');
+          $('#' + e.target.id + '> :first-child').html("keyboard_arrow_up");
+          // if on click event object was ascending, switch to descending
+        } else {
+          hidden_field.val('');
+          $('#' + e.target.id + '> :first-child').html("");
+          // if on click event object was descending, switch to empty sorting
+        }
+      }
+
+      catch(error) {
+        console.log("Button was clicked before value was reloaded");
+      }   
+    }
+
+    $("#search_form").submit();
+    // submit form after attaching correct values and changing keyboard arrows
+  })
+
+  $("#genres").on('change', function() {
+    // remove both sorting options from dropdowns, remove title query and submit form
+    removeBothSort();
+    $("#title").val('');
+    $("#search_form").submit();
+  });
+
+  $('#title').keyup(function() {
+    // clear values of other queries and submit form 1 second after typing stops
+    delay(function(){
+      $('#genres').val("0");
+      $('#genres').material_select();
+      removeBothSort();
+      $("#search_form").submit();
+    }, 1000 );
+  });
 });
 
-function onScroll(event){
-    if($(document).scrollTop() > 50) {
-      $(".navbar-fixed-top").addClass("scrolled");
-      $(".navbar-right").addClass("scrolled");
-      $(".brand-logo").addClass("scrolled");
-    } else {
-      $(".navbar-fixed-top").removeClass("scrolled");
-      $(".navbar-right").removeClass("scrolled");
-      $(".brand-logo").removeClass("scrolled");
+function removeSort(id) {
+  $("#title").val('');
+  // deselect genre category sorting
+
+  $(".waves-effect").each(function (){
+    if (id != this.id) {
+      $('#' + this.id + '_sort').val('');
+      $('#' + this.id + '> :first-child').html("");
+      // if one sort button selected, disable sorting options of other
     }
+  });
+}
+
+function removeBothSort() {
+  $(".waves-effect").each(function (){
+        $('#' + this.id + '_sort').val('');
+        $('#' + this.id + '> :first-child').html("");
+        // if one sort button selected, disable sorting options of other
+    });
+}
+
+function onScroll(event){
+  // change navbar to scrolled class once scroll initiates
+  if($(document).scrollTop() > 50) {
+    $(".navbar-fixed-top").addClass("scrolled");
+    $(".navbar-right").addClass("scrolled");
+    $(".brand-logo").addClass("scrolled");
+  } else {
+    $(".navbar-fixed-top").removeClass("scrolled");
+    $(".navbar-right").removeClass("scrolled");
+    $(".brand-logo").removeClass("scrolled");
+  }
 }
 
 // function to change transparency and colors of navbar
 
 function loadCategories() {
-		$.get("/movies/home_assets/", 
-    { });
-	
+  // use ajax to get posters and categories on home page
+	$.get("/movies/home_assets/", 
+  { });
 }
+
+var delay = (function(){
+  //https://stackoverflow.com/questions/1909441/how-to-delay-the-keyup-handler-until-the-user-stops-typing
+  var timer = 0;
+  return function(callback, ms){
+    clearTimeout (timer);
+    timer = setTimeout(callback, ms);
+  };
+})();
+
+
