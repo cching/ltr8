@@ -1,7 +1,46 @@
-<div class="parallax-container animated fadeIn show_movie">
-  <div class="parallax">
-    <%= image_tag("#{@backdrop}") %>
-  </div>
+<div class="parallax-container animated fadeIn <%= @backdrop.nil? ? "empty" : "show_movie" %>">
+	<% if !@backdrop.nil? %>
+  		<div class="parallax">
+    		<%= image_tag("#{@backdrop}") %>
+  		</div>
+  	<% end %>
 </div>
+<div class="show_movie_container">
+	<div class="row animated fadeInUp">
+		<div class="col-xs-1"></div>
+		<div class="col-xs-10">
+			<div class="show_movie_block">
+				<div class="movie_poster_container show_movie_poster">
+					<%= movie_poster(@movie.poster_path) %>
+				</div>
+				<div class="show_movie_info_container">
+				<div class="show_movie_title"><%= @movie.title %></div>
+					
+					<p>Directed by <%= @directors.map {|director| director.name }.join(", ") %></p>
+					<p><%= @movie.genres.map { |genre| genre.name }.join(", ") %></p>
+					<span class="show_movie_overview">Overview</span>
+					<p><%= @movie.overview %></p>
+				</div>
+				<div class="show_movie_release_date">
+					<%= release_date(@movie.release_date) %>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-1"></div>
+	</div>
 
-<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+	<% if !@cast.empty? %>
+		<div class="row cast_container animated fadeInUp">
+			<div class="col-xs-1"></div>
+			<div class="col-xs-11">
+				<p class="cast_title">Top Cast</p>
+			</div>
+		</div>
+
+		<div class="row cast_container animated fadeInUp">
+			<div class="col-xs-1"></div>
+			<%= movie_cast(@cast) %>
+			<div class="col-xs-1"></div>
+		</div>
+	<% end %>
+</div>

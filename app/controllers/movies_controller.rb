@@ -52,7 +52,7 @@ class MoviesController < ApplicationController
   end
 
   def show
-      @backdrop = Movie.image("backdrops", @movie.id, "w780")
+      @backdrop = Movie.image("backdrops", @movie.id, "w1280")
       @cast = Movie.define("movie", "cast", @movie.id)
       @directors = Movie.define("movie", "director", @movie.id)
   end

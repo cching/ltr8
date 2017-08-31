@@ -17,12 +17,24 @@ module MoviesHelper
 		end.join.html_safe
 	end
 
+	def movie_cast cast
+		cast.first(5).collect {|member| [member.name, member.profile_path] }.collect do |member|
+			content_tag(:div, class: "col-xs-2 cast_member") do 
+				if !member[1].nil?
+					image = Movie.concat_image("w185", "#{member[1]}")
+				end
+				image_tag("#{image ||= "missing.png"}", class: "center-block")  +
+				content_tag(:p, "#{member[0]}", class: "cast_name")
+			end
+		end.join.html_safe
+	end
+
 	def movie_poster path
 		if !path.nil? 
 			src = "#{Movie.concat_image("w342", path)}"
 		end
 
-		image_tag("#{src ||= "missing.png"}")
+		image_tag("#{src ||= "missing.png"}") 
 	end
 
 	def movie_overview overview, id, title

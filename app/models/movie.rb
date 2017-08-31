@@ -17,7 +17,7 @@ class Movie < ActiveRecord::Base
 		end
 	end
 
-	def self.concat_image style, path
+	def self.concat_image style, path 
 		self.base_url + style + path
 	end
 

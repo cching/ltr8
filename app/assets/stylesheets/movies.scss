@@ -122,6 +122,87 @@
 	bottom:25px;
 }
 
+.show_movie_block {
+	position:relative;
+	margin: 30px 30px 30px 30px;
+	height: 350px;
+	width: 97%;
+	background-color:#fff;
+}
+
+.show_movie_container {
+	height: 100%;
+	background-color: #FAFAFA;
+	overflow:hidden;
+	position: relative;
+}
+
+.show_movie_container .col-xs-10 {
+	padding-left:0px !important;
+	margin-left:0px !important;
+}
+
+.movie_poster_container.show_movie_poster {
+	width: 230px !important
+}
+
+.show_movie_block img {
+	position:absolute;
+	position: absolute;
+    top: -9999px;
+    bottom: -9999px;
+    left: -9999px;
+    right: -9999px;
+    margin: auto;
+	max-height:100%;
+}
+
+.show_movie_info_container {
+	position:absolute;
+	font-size:1.2em;
+	height:100%;
+    right: 0;
+	left: 290px;
+	top:40px;
+	padding-right:20px;
+}
+
+.show_movie_release_date {
+	position:absolute;
+	font-size:1.2em;
+	height:100%;
+	right: 50px;
+	top:45px;
+}
+
+.show_movie_title {
+	font-weight:bold;
+	font-size:1.6em;
+}
+
+.show_movie_overview {
+	font-weight:bold;
+	padding: 25px 0 15px 0;
+}
+
+.cast_container img {
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+}
+
+.cast_name {
+	font-weight:bold;
+	font-size:1.3em;
+	text-align:center;
+}
+
+.cast_title {
+	font-size:1.8em;
+	font-weight:bold;
+	padding-left:20px;
+}
+
 /* Loaders 
 */
 
