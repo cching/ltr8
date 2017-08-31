@@ -16,29 +16,14 @@
 					<div class="col-xs-6">
 						<div class="movie_block">
 							<div class="movie_poster_container">
-								<% if !movie.poster_path.nil? %>
-									<%= image_tag("#{Movie.concat_image("w342", movie.poster_path)}") %>
-								<% else %>
-									<%= image_tag("missing.png") %>
-								<% end %>
+								<%= movie_poster(movie.poster_path) %>
 							</div>
 							<div class="movie_info_container">
 								<div class="movie_title"><%= movie.title %></div>
-								<% if !movie.release_date.nil? %>
-									<div class="movie_date">
-										<%= DateTime.parse(movie.release_date).strftime('%B %Y') %>
-									</div>
-								<% end %>
-								<div class="overview">
-									<% if movie.overview.length > 250 %>
-										<%= truncate(movie.overview, :length => 250) %><br/>
-										<a class="read_more" href="#">Read more</a>
-									<% else %>
-										<%= movie.overview %>
-									<% end %>
-								</div>
+								<%= release_date(movie.release_date) %>
+								<%= movie_overview(movie.overview, movie.id, movie.title) %>
 								<div class="info_and_reviews">
-									<a class="read_more" href="#">Reviews and Info</a>
+									<%= link_to "Reviews and Info", movie_path(movie_link(movie.id, movie.title)), class: "read_more" %>
 								</div>
 							</div>
 						</div>
@@ -50,7 +35,7 @@
 	<div class="col-xs-1"></div>
 </div>
 
-<% if @movies.total_results > 20%>
+<% if @movies.total_results > 20 %>
 <div class="row">
 	<div class="col-xs-6">
 		<% if @page != 1 %>
@@ -58,7 +43,9 @@
 		<% end %>
 	</div>
 	<div class="col-xs-6">
-		<a class="waves-light btn right_col"><i class="material-icons left">chevron_right</i></a>
+		<% if @page != @movies.total_pages %>
+			<a class="waves-light btn right_col"><i class="material-icons left">chevron_right</i></a>
+		<% end %>
 	</div>
 </div>
 <% end %>

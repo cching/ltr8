@@ -5,9 +5,10 @@ $(document).ready(function () {
     // initialize material form select
     $(document).on("scroll", onScroll);
     
-    if ($("#parallax_container") != null) {
+    var homepage = (window.location.pathname == '/');
+    if (homepage) {
     	// only load AJAX requests on home page with valid object
-    	loadCategories();
+    loadCategories();
 
 		var replaceInt = setInterval(replaceHomeNP, 10000);
 
@@ -16,39 +17,35 @@ $(document).ready(function () {
 		    $.get("/movies/refresh_now_playing/" + i, 
 		    {});
 		    i++; 
-		    if (i == 20) { 
+		    if (i == 20 || !homepage) { 
 		    	clearInterval(replaceInt);   
 			}
 			// kill loop after 20th iteration of now playing array
 		}
 	}
 
-  $(".waves-effect").on("click", function(e) {
+  $(".sort_btn").on("click", function(e) {
     // on click function for title and release date sorting
     var value = $(this).attr("value");
     var hidden_field = $('#' + value + '_sort');
     e.target.blur();
 
-
-      if (hidden_field.val() == '' || hidden_field.val() == undefined) {
-        hidden_field.val(value + '.asc');
-        $('#' + value + '> :first-child').html("keyboard_arrow_down");
-        // if no sorting option, set to ascending first
+    if (hidden_field.val() == '' || hidden_field.val() == undefined) {
+      hidden_field.val(value + '.asc');
+      $('#' + value + '> :first-child').html("keyboard_arrow_down");
+      // if no sorting option, set to ascending first
+    } else {
+      // if there is a value:
+      if (hidden_field.val().slice(-3) == "asc") {
+        hidden_field.val(value + '.desc');
+        $('#' + value + '> :first-child').html("keyboard_arrow_up");
+        // if on click event object was ascending, switch to descending
       } else {
-          // try catch to prevent error if clicked before value is loaded too quicly
-          // if there is a value:
-
-        if (hidden_field.val().slice(-3) == "asc") {
-          hidden_field.val(value + '.desc');
-          $('#' + value + '> :first-child').html("keyboard_arrow_up");
-          // if on click event object was ascending, switch to descending
-        } else {
-          hidden_field.val('');
-          $('#' + value + '> :first-child').html("");
-          // if on click event object was descending, switch to empty sorting
-        }
-
+        hidden_field.val('');
+        $('#' + value + '> :first-child').html("");
+        // if on click event object was descending, switch to empty sorting
       }
+    }
     removeSort(value);
     $("#movie_container").html("");
     $("#search_form").submit();
@@ -58,13 +55,14 @@ $(document).ready(function () {
   $("#genres").on('change', function() {
     // remove both sorting options from dropdowns, remove title query and submit form
     $("#title").val('');
+    Materialize.updateTextFields();
     $("#movie_container").html("");
     $("#search_form").submit();
   });
 
   $('#title').keyup(function() {
-    // clear values of other queries and submit form 0.5 second after typing stops
     delay(function(){
+      // submit form and clear other values after 0.5s after last keyup in title search
       $('#genres').val("0");
       $('#genres').material_select();
       removeBothSort();
@@ -76,9 +74,8 @@ $(document).ready(function () {
 
 function removeSort(id) {
   $("#title").val('');
-  // deselect genre category sorting
-
-  $(".waves-effect").each(function (){
+  Materialize.updateTextFields();
+  $(".sort_btn").each(function (){
     if (id != this.id) {
       $('#' + this.id + '_sort').val('');
       $('#' + this.id + '> :first-child').html("");
@@ -88,11 +85,11 @@ function removeSort(id) {
 }
 
 function removeBothSort() {
-  $(".waves-effect").each(function (){
+  $(".sort_btn").each(function (){
         $('#' + this.id + '_sort').val('');
         $('#' + this.id + '> :first-child').html("");
         // if one sort button selected, disable sorting options of other
-    });
+  });
 }
 
 function onScroll(event){
@@ -109,7 +106,6 @@ function onScroll(event){
 }
 
 // function to change transparency and colors of navbar
-
 function loadCategories() {
   // use ajax to get posters and categories on home page
 	$.get("/movies/home_assets/", 
@@ -127,5 +123,4 @@ var delay = (function(){
     timer = setTimeout(callback, ms);
   };
 })();
-
 

@@ -1,6 +1,7 @@
 $("#movie_container").html("<%= j(render 'search_results') %>");
 $("#page").val(<%= @page %>);
 $("#direction").val('');
+// set page number in form, remove directionality
 
 $(".left_col").on("click", function() {
 	$("#direction").val('prev');
@@ -13,3 +14,4 @@ $(".right_col").on("click", function() {
 	$("#movie_container").html("");
 	$("#search_form").submit();
 });
+// initialize pagination buttons, on click submit form

@@ -4,7 +4,6 @@ class Movie < ActiveRecord::Base
 		# image_type: backdrop, poster
 		# movie_id: tmdb internal ID
 		# style: original, w300, etc sizes
-		# require secure base url to prevent unsecure resources being loaded over https
 		results = self.define("movie", image_type, movie_id)
 
 		begin
@@ -52,6 +51,7 @@ class Movie < ActiveRecord::Base
 
 	def self.base_url
 		"https://image.tmdb.org/t/p/" 
+		# require secure base url to prevent unsecure resources being loaded over https
 	end
 
 	def self.config

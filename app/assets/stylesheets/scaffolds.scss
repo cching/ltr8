@@ -17,6 +17,10 @@
   min-height: 100vh;
 }
 
+.parallax-container.show_movie {
+  min-height: 75vh !important;
+}
+
 .brand-logo {
   padding-top: 20px;
   padding-left: 30px;

@@ -6,5 +6,6 @@ $(".category_links").on("click", function() {
     $('#genres').val("0");
     $('#genres').material_select();
     removeBothSort();
+    Materialize.updateTextFields();
     // remove sorting on search form when category is clicked and displayed
 });

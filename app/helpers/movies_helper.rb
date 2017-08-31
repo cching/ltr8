@@ -17,6 +17,52 @@ module MoviesHelper
 		end.join.html_safe
 	end
 
+	def movie_poster path
+		if !path.nil? 
+			src = "#{Movie.concat_image("w342", path)}"
+		end
+
+		image_tag("#{src ||= "missing.png"}")
+	end
+
+	def movie_overview overview, id, title
+		content_tag(:div, class: "overview") do 
+			if overview.length > 250 
+				truncate(overview, :length => 250) + tag(:br) +
+				link_to(movie_path(movie_link(id, title)), class: "read_more") do 
+					"Read more"
+				end
+			else 
+				overview 
+			end
+		end
+	end
+
+	def movie_link id, title
+		begin
+			"#{id}-#{title.parameterize}"
+		rescue
+			id
+		end
+	end
+
+	def release_date date
+		if !date.nil?
+			content_tag(:div, class: "movie_date") do 
+				datetime_parse(date)
+			end
+		end
+	end
+
+	def datetime_parse date
+		begin 
+			DateTime.parse(date).strftime('%B %Y')
+		rescue
+			# for movies with inconsistent or nil dates
+			""
+		end
+	end
+
 	Categories = [
 	    ['Top Rated', 'top_rated'],
 	    ['Popular', 'popular'],
