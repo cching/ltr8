@@ -1,1 +1,10 @@
-$("#movie_categories").html("<%= escape_javascript(render 'categories') %>");
+$("#movie_categories").html("<%= j(render 'categories') %>");
+
+$(".category_links").on("click", function() {
+    $("#movie_container").html("");
+    $("#title").val('');
+    $('#genres').val("0");
+    $('#genres').material_select();
+    removeBothSort();
+    // remove sorting on search form when category is clicked and displayed
+});

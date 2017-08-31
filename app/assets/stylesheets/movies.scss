@@ -1,5 +1,6 @@
 .category_titles {
 	position:relative;
+	padding-bottom:15px;
 	overflow:hidden;
 }
 
@@ -10,8 +11,15 @@
 	top:15px;
 	padding-left:25px;
 	left:0px;
-
 	font-size:1.7vw;
+	color: #000;
+	font-weight:bold;
+}
+
+.category_selection_title {
+	padding-top:10px;
+	padding-left:15px;
+	font-size:2vw;
 	color: #000;
 	font-weight:bold;
 }
@@ -56,6 +64,66 @@
 	padding-right: 40px !important;
 }
 
+#movie_container:not(:empty) {
+	background-color:#FAFAFA;
+	padding-top:10px;
+}
+
+.movie_block {
+	width:100%;
+	background-color:#fff;
+	height:300px;
+}
+
+.movie_poster_container {
+	height:100%;
+	width:200px;
+	overflow:hidden;
+	position: relative;
+}
+
+.movie_block img {
+	position:absolute;
+	position: absolute;
+    top: -9999px;
+    bottom: -9999px;
+    left: -9999px;
+    right: -9999px;
+    margin: auto;
+	max-height:100%;
+}
+
+.movie_info_container {
+	position:absolute;
+	height:100%;
+	left: 235px;
+	top:15px;
+	padding-right:20px;
+}
+
+.movie_title {
+	font-weight:bold;
+	font-size:1.3em;
+}
+
+.movie_date {
+	font-style:italic;
+}
+
+.overview {
+	padding-top:20px;
+	font-size:1em;
+}
+
+.info_and_reviews {
+	position:absolute;
+	right:30px;
+	bottom:25px;
+}
+
+/* Loaders 
+*/
+
 .loader,
 .loader:before,
 .loader:after {
@@ -65,6 +133,7 @@
   width: 1em;
   height: 4em;
 }
+
 .loader {
   color: #64aff4;
   text-indent: -9999em;
@@ -119,7 +188,7 @@
 /* load spinner source: https://projects.lukehaas.me/css-loaders/
 */
 
-.movie_container:empty {
+#movie_container:empty {
 	margin: auto;
 	width: 500px;
 	height: 600px; /* change height to see repeat-y behavior */

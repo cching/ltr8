@@ -1,0 +1,15 @@
+$("#movie_container").html("<%= j(render 'search_results') %>");
+$("#page").val(<%= @page %>);
+$("#direction").val('');
+
+$(".left_col").on("click", function() {
+	$("#direction").val('prev');
+	$("#movie_container").html("");
+	$("#search_form").submit();
+});
+
+$(".right_col").on("click", function() {
+	$("#direction").val('next');
+	$("#movie_container").html("");
+	$("#search_form").submit();
+});

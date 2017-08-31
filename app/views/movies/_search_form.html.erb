@@ -19,12 +19,14 @@
     </div>
     </div>
     <div class="col-xs-2 button_col">
-      <a class="waves-effect waves-light btn" id="title"><i class="material-icons right"></i>Title</a>
-      <%= hidden_field_tag :title_sort %>
+      <a class="waves-effect waves-light btn" value="original_title" id="original_title"><i class="material-icons right"></i>Title</a>
+      <%= hidden_field_tag :original_title_sort %>
     </div>
-    <div class="col-xs-2 button_col">
-      <a class="waves-effect waves-light btn" id="release_date"><i class="material-icons right"></i>Release Date</a>
-      <%= hidden_field_tag :release_date_sort %>
+    <div class="col-xs-2 button_col ">
+      <a class="waves-effect waves-light btn" value="primary_release_date" id="primary_release_date"><i class="material-icons right"></i>Release Date</a>
+      <%= hidden_field_tag :primary_release_date_sort %>
+      <%= hidden_field_tag :page, @page %>
+      <%= hidden_field_tag :direction %>
     </div>
 
     <div class="col-xs-1"></div>

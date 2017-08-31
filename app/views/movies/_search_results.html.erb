@@ -1,0 +1,64 @@
+<div class="row animated fadeIn">
+	<% if defined?(@category) %>
+		<div class="row">
+			<div class="col-xs-1"></div>
+			<div class="col-xs-11">
+				<p class="category_selection_title"><%= @category.humanize %>
+			</div>
+		</div>
+	<% end %>
+
+	<div class="col-xs-1"></div>
+	<div class="col-xs-10">
+		<% @movies.results.each_slice(2) do |slice| %>
+			<div class="row">
+				<% slice.each do |movie| %>
+					<div class="col-xs-6">
+						<div class="movie_block">
+							<div class="movie_poster_container">
+								<% if !movie.poster_path.nil? %>
+									<%= image_tag("#{Movie.concat_image("w342", movie.poster_path)}") %>
+								<% else %>
+									<%= image_tag("missing.png") %>
+								<% end %>
+							</div>
+							<div class="movie_info_container">
+								<div class="movie_title"><%= movie.title %></div>
+								<% if !movie.release_date.nil? %>
+									<div class="movie_date">
+										<%= DateTime.parse(movie.release_date).strftime('%B %Y') %>
+									</div>
+								<% end %>
+								<div class="overview">
+									<% if movie.overview.length > 250 %>
+										<%= truncate(movie.overview, :length => 250) %><br/>
+										<a class="read_more" href="#">Read more</a>
+									<% else %>
+										<%= movie.overview %>
+									<% end %>
+								</div>
+								<div class="info_and_reviews">
+									<a class="read_more" href="#">Reviews and Info</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				<% end %>
+			</div>
+		<% end %>
+	</div>
+	<div class="col-xs-1"></div>
+</div>
+
+<% if @movies.total_results > 20%>
+<div class="row">
+	<div class="col-xs-6">
+		<% if @page != 1 %>
+			<a class="waves-light btn left_col"><i class="material-icons left">chevron_left</i></a>
+		<% end %>
+	</div>
+	<div class="col-xs-6">
+		<a class="waves-light btn right_col"><i class="material-icons left">chevron_right</i></a>
+	</div>
+</div>
+<% end %>

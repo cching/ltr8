@@ -25,54 +25,52 @@ $(document).ready(function () {
 
   $(".waves-effect").on("click", function(e) {
     // on click function for title and release date sorting
-    var hidden_field = $('#' + e.target.id + '_sort');
-    removeSort(e.target.id);
+    var value = $(this).attr("value");
+    var hidden_field = $('#' + value + '_sort');
     e.target.blur();
 
-    if (hidden_field.val() == '') {
-      hidden_field.val(e.target.id + '.asc');
-      $('#' + e.target.id + '> :first-child').html("keyboard_arrow_down");
-      // if no sorting option, set to ascending first
-    } else {
-      try {
-        // try catch to prevent error if clicked before value is loaded too quicly
-        // if there is a value:
+
+      if (hidden_field.val() == '' || hidden_field.val() == undefined) {
+        hidden_field.val(value + '.asc');
+        $('#' + value + '> :first-child').html("keyboard_arrow_down");
+        // if no sorting option, set to ascending first
+      } else {
+          // try catch to prevent error if clicked before value is loaded too quicly
+          // if there is a value:
 
         if (hidden_field.val().slice(-3) == "asc") {
-          hidden_field.val(e.target.id + '.desc');
-          $('#' + e.target.id + '> :first-child').html("keyboard_arrow_up");
+          hidden_field.val(value + '.desc');
+          $('#' + value + '> :first-child').html("keyboard_arrow_up");
           // if on click event object was ascending, switch to descending
         } else {
           hidden_field.val('');
-          $('#' + e.target.id + '> :first-child').html("");
+          $('#' + value + '> :first-child').html("");
           // if on click event object was descending, switch to empty sorting
         }
+
       }
-
-      catch(error) {
-        console.log("Button was clicked before value was reloaded");
-      }   
-    }
-
+    removeSort(value);
+    $("#movie_container").html("");
     $("#search_form").submit();
     // submit form after attaching correct values and changing keyboard arrows
   })
 
   $("#genres").on('change', function() {
     // remove both sorting options from dropdowns, remove title query and submit form
-    removeBothSort();
     $("#title").val('');
+    $("#movie_container").html("");
     $("#search_form").submit();
   });
 
   $('#title').keyup(function() {
-    // clear values of other queries and submit form 1 second after typing stops
+    // clear values of other queries and submit form 0.5 second after typing stops
     delay(function(){
       $('#genres').val("0");
       $('#genres').material_select();
       removeBothSort();
+      $("#movie_container").html("");
       $("#search_form").submit();
-    }, 1000 );
+    }, 500 );
   });
 });
 
@@ -115,6 +113,9 @@ function onScroll(event){
 function loadCategories() {
   // use ajax to get posters and categories on home page
 	$.get("/movies/home_assets/", 
+  { });
+
+  $.get("/movies/search/", 
   { });
 }
 

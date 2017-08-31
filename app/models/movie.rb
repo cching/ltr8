@@ -4,13 +4,12 @@ class Movie < ActiveRecord::Base
 		# image_type: backdrop, poster
 		# movie_id: tmdb internal ID
 		# style: original, w300, etc sizes
-		base_url = self.config.images.secure_base_url
 		# require secure base url to prevent unsecure resources being loaded over https
 		results = self.define("movie", image_type, movie_id)
 
 		begin
 			if results.any?
-				base_url + style + results.first.file_path
+				self.concat_image(style, results.first.file_path)
 				# concat image url
 			end
 		rescue
@@ -19,7 +18,11 @@ class Movie < ActiveRecord::Base
 		end
 	end
 
-	def self.define klass_name, method_name, params = nil
+	def self.concat_image style, path
+		self.base_url + style + path
+	end
+
+	def self.define klass_name, method_name, params = nil, query = nil
 		# Dynamically call class and method name on Tmdb module
 		# klass_name: Collection, Movie, Search, etc
 		# method_name: backdrops, posters, top rated, popular, etc
@@ -29,6 +32,9 @@ class Movie < ActiveRecord::Base
 				if params.nil?
 					klass.public_send(method_name) 
 					# movie categories (popular, top rated, etc) do not take a movie ID input
+				elsif !query.nil?
+					klass.public_send(method_name, query, params)
+					# extra query for searching method
 				elsif params.is_a?(Hash)
 					klass.public_send(method_name, params)
 					# sort_by requires a key and value
@@ -44,8 +50,16 @@ class Movie < ActiveRecord::Base
 		end
 	end
 
+	def self.base_url
+		"https://image.tmdb.org/t/p/" 
+	end
+
 	def self.config
 		Tmdb::Configuration.get
 		# get system wide configuration info
+	end
+
+	def self.params_exist param
+		param && !param.empty?
 	end
 end
