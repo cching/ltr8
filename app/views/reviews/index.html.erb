@@ -1,33 +1,15 @@
-<p id="notice"><%= notice %></p>
+<div class="parallax-container review animated fadeIn">
+  <div class="parallax">
+    <%= image_tag("#{@image}") %>
+  </div>
+  <div class="intro_header_text">
+    <p class="large_intro_header_text">
+      all reviews
+    </p>
 
-<h1>Listing Reviews</h1>
+  </div>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th>User</th>
-      <th>Movie</th>
-      <th>Content</th>
-      <th>Rating</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @reviews.each do |review| %>
-      <tr>
-        <td><%= review.user_id %></td>
-        <td><%= review.movie_id %></td>
-        <td><%= review.content %></td>
-        <td><%= review.rating %></td>
-        <td><%= link_to 'Show', review %></td>
-        <td><%= link_to 'Edit', edit_review_path(review) %></td>
-        <td><%= link_to 'Destroy', review, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Review', new_review_path %>
+<div class="review_container sort_paginate_ajax">
+  <%= render 'reviews' %>
+</div>

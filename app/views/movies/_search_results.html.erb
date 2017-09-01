@@ -3,11 +3,11 @@
 		<div class="row">
 			<div class="col-xs-1"></div>
 			<div class="col-xs-11">
-				<p class="category_selection_title"><%= @category.humanize %>
+				<p class="category_selection_title"><%= @category.humanize %></p>
 			</div>
 		</div> 
 	<% end %>
-
+ 
 	<div class="col-xs-1"></div>
 	<div class="col-xs-10">
 		<% @movies.results.each_slice(2) do |slice| %>
@@ -39,16 +39,16 @@
 </div>
 
 <% if @movies.total_results > 20 %>
-<div class="row">
-	<div class="col-xs-6">
-		<% if @page != 1 %>
-			<a class="waves-light btn left_col"><i class="material-icons left">chevron_left</i></a>
-		<% end %>
+	<div class="row">
+		<div class="col-xs-6">
+			<% if @page != 1 %>
+				<a class="waves-light btn left_col"><i class="material-icons left">chevron_left</i></a>
+			<% end %>
+		</div>
+		<div class="col-xs-6">
+			<% if @page != @movies.total_pages %>
+				<a class="waves-light btn right_col"><i class="material-icons left">chevron_right</i></a>
+			<% end %>
+		</div>
 	</div>
-	<div class="col-xs-6">
-		<% if @page != @movies.total_pages %>
-			<a class="waves-light btn right_col"><i class="material-icons left">chevron_right</i></a>
-		<% end %>
-	</div>
-</div>
 <% end %>

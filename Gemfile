@@ -16,14 +16,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'themoviedb-api'
 # ruby wrapper for the TMDB (the movie database) API
 
-gem 'acts_as_commentable_with_threading'
-# Gem so I don't have to go through the pain of making polymorphic relationships and logic for threaded commenting on reviews
-
-gem 'thumbs_up'
-# Logic to quickly handle upvote/downvote on reviews
-
-gem 'ratyrate'
-
+gem 'will_paginate', '~> 3.1.0'
+# for pagination of reviews to limit Tmdb API call
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

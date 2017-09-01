@@ -1,5 +1,5 @@
 class Review < ActiveRecord::Base
-	validates :rating, :movie_id, presence: true
+	validates :rating, :movie_id, :user_id, presence: true
 	validates_uniqueness_of :user_id, :scope => :movie_id, :message => "You've already reviewed this movie."
 	validates_numericality_of :rating, on: :create, :message => "Should never happen"
 	validates_inclusion_of :rating, :in => 1..5, :message => "Please enter a rating for this movie."

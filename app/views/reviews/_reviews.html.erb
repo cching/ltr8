@@ -1,0 +1,38 @@
+<div class="row">
+	<div class="col-xs-1"></div>
+	<div class="col-xs-10">
+		<% @reviews.each_slice(2) do |slice| %>
+			<div class="row">
+				<% slice.each do |review| %>
+					<% movie = Movie.define("movie", "detail", review.movie_id) %>
+					<div class="col-xs-6">
+						<div class="review_block">
+							<div class="movie_poster_container">
+								<%= movie_poster(movie.poster_path) %>
+							</div>
+							<div class="review_info_container">
+								<div class="movie_title"><%= movie.title %></div>
+								<p class="review_author"><%= review.user.email %> says</p>
+								<p class="review_content"><%= review.content.html_safe %></p>
+
+								<div class="movie_average_rating">
+									<input class="readonly_rating_xs" name="readonly_rating_xs" value="<%= review.rating %>">
+								</div>
+								<div class="info_and_reviews">
+									<%= link_to "More Reviews and Info", movie_path(movie_link(movie.id, movie.title)), class: "read_more" %>
+								</div>
+							</div>
+						</div>
+					</div>
+				<% end %>
+			</div>
+		<% end %>
+	</div>
+	<div class="col-xs-1"></div>
+</div>
+
+<div class="link_wrapper">
+	<div class="page_links">
+		<%= will_paginate @review, page_links: false %> 
+	</div>
+</div>

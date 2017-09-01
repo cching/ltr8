@@ -85,3 +85,65 @@
 	top: 10px;
 	right: 15px;
 }
+
+.parallax-container.review {
+  min-height: 60vh !important;
+}
+
+.review_container {
+	padding-top:20px;
+	background-color:#FAFAFA;
+}
+
+
+.review_block {
+	width:100%;
+	background-color:#fff;
+	height:300px;
+}
+
+.review_block img {
+	position:absolute;
+	position: absolute;
+    top: -9999px;
+    bottom: -9999px;
+    left: -9999px;
+    right: -9999px;
+    margin: auto;
+	max-height:100%;
+}
+
+.review_info_container {
+	position:absolute;
+	height:100%;
+    right: 0;
+	left: 235px;
+	top:15px;
+	padding-right:20px;
+}
+
+.review_author {
+	position: absolute;
+	top:50px;
+	left:10px;
+	font-style:italic;
+	font-weight:bold;
+	font-size:1em;
+}
+
+.review_content {
+	position:absolute;
+	top:80px;
+	right: 20px;
+	left: 10px;
+	height: 120px;
+	font-size:1em;
+	overflow: scroll;
+}
+
+.link_wrapper {
+	text-align: center;
+}
+.page_links {
+	display: inline-block;
+}

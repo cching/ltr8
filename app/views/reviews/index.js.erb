@@ -1,0 +1,7 @@
+$('.sort_paginate_ajax').html("<%= escape_javascript(render("reviews"))%>");
+
+$('.readonly_rating_xs').rating({
+    	displayOnly: true, 
+    	step: 0.1,
+    	size: "xs"
+});
