@@ -27,7 +27,7 @@ class MoviesController < ApplicationController
   end
 
   def search
-    form_params = ["original_title_sort", "primary_release_date_sort"]
+    
     # Tmdb API does not allow mixed queries between titles and release date/title name/date, eg a title can't be inputted and then sorted remotely
     # two separate Tmdb methods must be used (Tmdb::Discover & Tmdb::Search)
 
@@ -82,5 +82,6 @@ class MoviesController < ApplicationController
       # define page number and page direction for pagination
       @page ||= 1
       # if no page direction, start at page 1
+      @form_params = ["original_title_sort", "primary_release_date_sort"]
     end
 end
