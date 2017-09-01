@@ -1,6 +1,12 @@
 $("#movie_container").html("<%= j(render 'search_results') %>");
 $("#page").val(<%= @page %>);
 $("#direction").val('');
+<% if !@category.nil? %>
+	$("#category").val("<%= @category %>");
+<% else %>
+$("#category").val("");
+<% end %>
+
 // set page number in form, remove directionality
 
 $(".left_col").on("click", function() {
