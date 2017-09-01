@@ -764,6 +764,27 @@ input::-webkit-inner-spin-button {
 .right_col {
   float: left;
 }
+
+/* line 154, /Users/chris/rails_projects/tlr8/app/assets/stylesheets/scaffolds.scss */
+.footer {
+  padding-top: 20px;
+  background-color: #fafafa;
+}
+
+/* line 159, /Users/chris/rails_projects/tlr8/app/assets/stylesheets/scaffolds.scss */
+.footer_row {
+  height: 100px;
+  background-color: #fff;
+  padding: 20px 20px 20px 20px;
+}
+
+/* line 165, /Users/chris/rails_projects/tlr8/app/assets/stylesheets/scaffolds.scss */
+.tmdb_logo img {
+  padding-top: 20px;
+  margin-bottom: 30px;
+  float: right;
+  max-width: 25%;
+}
 /*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
  * Copyright 2011-2016 Twitter, Inc.
