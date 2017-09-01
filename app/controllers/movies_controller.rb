@@ -55,8 +55,7 @@ class MoviesController < ApplicationController
       @backdrop = Movie.image("backdrops", @movie.id, "w1280")
       @cast = Movie.define("movie", "cast", @movie.id)
       @directors = Movie.define("movie", "director", @movie.id)
-      reviews = Review.where(:movie_id => @movie.id)
-      @comments = reviews.where.not(content: nil)
+      @comments = Review.where(:movie_id => @movie.id).where.not(content: "").order("created_at DESC")
       @rating = Review.rating(@movie.id)
   end
 

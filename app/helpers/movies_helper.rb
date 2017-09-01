@@ -1,21 +1,23 @@
 module MoviesHelper
 	def movie_categories
 		# Renders the categories below the now playing backdrop
-		Categories.collect do |array|
-			link_to(search_movies_path(:category => array.second), remote: true, class: "category_links") do
-				content_tag(:div, class: "col-xs-2 category_titles animated fadeIn") do 
+		Categories.collect do |array|	
+			content_tag(:div, class: "col-xs-2 animated fadeIn") do 
+				link_to(search_movies_path(:category => array.second), remote: true, class: "category_links") do
 					movie_id = Movie.define("movie", array.second).results[rand(0..19)].id
 					poster = Movie.image("posters", movie_id, "w342")
 					until !poster.nil?
 						movie_id = Movie.define("movie", array.second).results[rand(0..19)].id
 					end
 					# ensures no preview category poster is nil
-					tag("img", src: "#{poster}") +
-					content_tag(:p, "#{array.first}")
+					content_tag(:div, class: "category_titles") do
+						image_tag("#{poster}")  +
+						content_tag(:p, "#{array.first}")
+					end
 				end
 			end
 		end.join.html_safe
-	end
+	end 
 
 	def movie_cast cast
 		cast.first(5).collect {|member| [member.name, member.profile_path] }.collect do |member|

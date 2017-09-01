@@ -1,0 +1,44 @@
+<div class="row cast_container animated fadeInUp">
+	<div class="col-xs-1"></div>
+	<div class="col-xs-11">
+		<p class="cast_title">Reviews</p>
+	</div>
+</div>
+
+<% if @comments.empty? %>
+	<div class="row">
+		<div class="col-xs-1"></div>
+		<div class="col-xs-10">
+			<div class="comment_container_empty">
+				<p class="comment_container_empty_tag">No reviews have been written for this movie yet.</p>
+			</div>
+		</div>
+		<div class="col-xs-1"></div>
+	</div>
+<% else %>
+	<% @comments.each_slice(2) do |slice| %>
+		<div class="row animated fadeInUp">
+			<div class="col-xs-1"></div>
+				<% slice.each do |comment| %>
+					<div class="col-xs-5">
+						<div class="comment_container">
+							<%= image_tag("empty_user.png") %>
+							<p class="review_date">
+								<%= review_date(comment.created_at) %>
+							</p>
+							<p class="comment_author">
+								<%= comment.user.email %> says:
+							</p>
+							<p class="comment_content">
+								<%= comment.content.html_safe %>
+							</p>
+							<div class="comment_movie_rating">
+								<input class="readonly_rating_xs" name="readonly_rating_xs" value="<%= comment.rating %>">
+							</div>
+						</div>
+					</div>
+				<% end %>
+			<div class="col-xs-1"></div>
+		</div>
+	<% end %>
+<% end %>

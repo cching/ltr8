@@ -11,6 +11,5 @@ Rails.application.routes.draw do
       # index of now playing array to load
     end
   end
-
   root 'movies#home'
 end

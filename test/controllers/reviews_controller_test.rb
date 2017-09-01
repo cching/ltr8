@@ -12,38 +12,18 @@ class ReviewsControllerTest < ActionController::TestCase
   end
 
   test "should get new" do
-    get :new
+    xhr :get, :create, {email: "cching@berkeley.edu", movie_id: 550}
+    assert_response :success
+  end
+
+  test "create should respond with 200" do
+    xhr :post, :create, { content: @review.content, movie_id: @review.movie_id, rating: @review.rating, user_id: @review.user_id }
     assert_response :success
   end
 
   test "should create review" do
     assert_difference('Review.count') do
-      post :create, review: { content: @review.content, movie_id: @review.movie_id, rating: @review.rating, user_id: @review.user_id }
+      xhr :post, :create, { content: @review.content, movie_id: @review.movie_id, rating: @review.rating, user_id: @review.user_id }
     end
-
-    assert_redirected_to review_path(assigns(:review))
-  end
-
-  test "should show review" do
-    get :show, id: @review
-    assert_response :success
-  end
-
-  test "should get edit" do
-    get :edit, id: @review
-    assert_response :success
-  end
-
-  test "should update review" do
-    patch :update, id: @review, review: { content: @review.content, movie_id: @review.movie_id, rating: @review.rating, user_id: @review.user_id }
-    assert_redirected_to review_path(assigns(:review))
-  end
-
-  test "should destroy review" do
-    assert_difference('Review.count', -1) do
-      delete :destroy, id: @review
-    end
-
-    assert_redirected_to reviews_path
   end
 end

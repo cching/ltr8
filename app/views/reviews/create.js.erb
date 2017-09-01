@@ -1,0 +1,15 @@
+$("#movie_rating").html("<input id='readonly_rating' name='readonly_rating' value='<%= @rating %>''>");
+$("#comments").html("<%= j(render 'movies/comments') %>");
+$("#new_comment").html("");
+
+$('#readonly_rating').rating({
+	displayOnly: true, 
+	step: 0.5,
+	size: "sm"
+});
+
+$('.readonly_rating_xs').rating({
+	displayOnly: true, 
+	step: 0.1,
+	size: "xs"
+});

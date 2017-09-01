@@ -1,42 +1,45 @@
 <div class="col-xs-1"></div>
-    <div class="col-xs-10">
-      <div class="review_form_container">
-        <%= form_for(@review, remote: true) do |f| %>
-              <% if @review.errors.any? %>
+  <div class="col-xs-10">
+    <div class="review_form_container">
+      <%= form_for(@review, remote: true) do |f| %>
+        <% if @review.errors.any? || @user.errors.any? %>
           <div id="error_explanation">
             <ul>
             <% @review.errors.each do |attr, message| %>
               <li><%= message %></li>
             <% end %>
+            <% @user.errors.each do |attr, message| %>
+              <li><%= message %></li>
+            <% end %>
             </ul>
           </div>
         <% end %>
-        <div class="row">
-          <div class="col-xs-8">
-            <div class="input-field">
-              <i class="material-icons prefix">email</i>
-              <%= text_field_tag :email, @email %>
-              <label for="icon_prefix">Email</label>
-            </div>
-          </div>
-          <div class="col-xs-4">
-            <%= number_field_tag :rating, "", id: "review_rate", class: "rating" %>
+      <div class="row">
+        <div class="col-xs-8">
+          <div class="input-field">
+            <i class="material-icons prefix">email</i>
+            <%= text_field_tag :email, @email %>
+            <label for="icon_prefix">Email</label>
           </div>
         </div>
-
-        <div class="input-field">
-          <i class="material-icons prefix">mode_edit</i>
-          <%= text_field_tag :content, "", class: "materialize-textarea" %>
-          <label for="icon_prefix2">Comments (optional)</label>
+        <div class="col-xs-4">
+          <%= number_field_tag :rating, "", id: "review_rate", class: "rating" %>
         </div>
-
-        <%= hidden_field_tag :movie_id, @movie_id %>
-        <div class="show_movie_submit">
-          <button class="btn waves-effect waves-light" type="submit" name="action">Submit
-            <i class="material-icons right">send</i>
-          </button>
-        </div>
-        <% end %>
       </div>
+
+      <div class="input-field">
+        <i class="material-icons prefix">mode_edit</i>
+        <%= text_field_tag :content, "", class: "materialize-textarea" %>
+        <label for="icon_prefix2">Comments (optional)</label>
+      </div>
+
+      <%= hidden_field_tag :movie_id, @movie_id %>
+      <div class="show_movie_submit">
+        <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+          <i class="material-icons right">send</i>
+        </button>
+      </div>
+      <% end %>
+    </div>
     </div>
 <div class="col-xs-1"></div>

@@ -15,14 +15,12 @@
 				</div>
 				<div class="show_movie_info_container">
 				<div class="show_movie_title"><%= @movie.title %></div>
-					
 					<p>Directed by <%= @directors.map {|director| director.name }.join(", ") %></p>
 					<p><%= @movie.genres.map { |genre| genre.name }.join(", ") %></p>
 					<span class="show_movie_overview">Overview</span>
 					<p><%= @movie.overview %></p>
-					<div class="show_movie_rating">
-						<input id="readonly_rating" name="readonly_rating" value="<%= @rating %>" class="rating-loading">
-
+					<div class="show_movie_rating" id="movie_rating">
+						<input id="readonly_rating" name="readonly_rating" value="<%= @rating %>">
 					</div>
 					<div class="show_movie_new_review">
 						<%= link_to new_review_path(:movie_id => @movie.id), remote: true, class: "waves-effect waves-light btn" do %>
@@ -54,6 +52,10 @@
 	<% end %>
 
 	<div class="row" id="new_comment">
+	</div>
+
+	<div id="comments">
+		<%= render 'comments' %>
 	</div>
 </div>
 
