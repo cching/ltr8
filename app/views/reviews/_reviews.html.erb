@@ -12,7 +12,7 @@
 							</div>
 							<div class="review_info_container">
 								<div class="movie_title"><%= movie.title %></div>
-								<p class="review_author"><%= review.user.email %> said <%= time_ago_in_words(review.created_at) %></p>
+								<p class="review_author"><%= review.user.email %> said <%= time_ago_in_words(review.created_at) ago %></p>
 								<p class="review_content"><%= review.content.html_safe %></p>
 
 								<div class="movie_average_rating">
