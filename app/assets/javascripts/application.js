@@ -14,4 +14,6 @@
 //= require jquery_ujs
 //= require bootstrap.min
 //= require materialize.min
+//= require star-rating.min
 //= require_tree .
+

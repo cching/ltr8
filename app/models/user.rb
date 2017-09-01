@@ -1,3 +1,5 @@
 class User < ActiveRecord::Base
-	# validate presence of email, regex with @
+	validates :email, presence: true
+	validates_uniqueness_of :email
+	validates_format_of :email, :with => /@/, :message => "Invalid email format"
 end

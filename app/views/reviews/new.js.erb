@@ -1,0 +1,12 @@
+$("#new_comment").html("<%= j(render 'form') %>");
+
+$("#review_rate").rating({
+	step: 1,
+	starCaptions: {}
+});
+
+Materialize.updateTextFields();
+
+$('html,body').animate({scrollTop: $('input').offset().top}, 400, function() {
+    $("#email").focus();
+});

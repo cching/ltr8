@@ -20,6 +20,15 @@
 					<p><%= @movie.genres.map { |genre| genre.name }.join(", ") %></p>
 					<span class="show_movie_overview">Overview</span>
 					<p><%= @movie.overview %></p>
+					<div class="show_movie_rating">
+						<input id="readonly_rating" name="readonly_rating" value="<%= @rating %>" class="rating-loading">
+
+					</div>
+					<div class="show_movie_new_review">
+						<%= link_to new_review_path(:movie_id => @movie.id), remote: true, class: "waves-effect waves-light btn" do %>
+							<i class="material-icons right">edit</i>Review Movie
+						<% end %>
+					</div>
 				</div>
 				<div class="show_movie_release_date">
 					<%= release_date(@movie.release_date) %>
@@ -43,4 +52,8 @@
 			<div class="col-xs-1"></div>
 		</div>
 	<% end %>
+
+	<div class="row" id="new_comment">
+	</div>
 </div>
+

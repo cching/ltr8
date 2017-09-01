@@ -22,6 +22,9 @@
 								<div class="movie_title"><%= movie.title %></div>
 								<%= release_date(movie.release_date) %>
 								<%= movie_overview(movie.overview, movie.id, movie.title) %>
+								<div class="movie_average_rating">
+									<input class="readonly_rating_xs" name="readonly_rating_xs" value="<%= Review.rating(movie.id) %>">
+								</div>
 								<div class="info_and_reviews">
 									<%= link_to "Reviews and Info", movie_path(movie_link(movie.id, movie.title)), class: "read_more" %>
 								</div>

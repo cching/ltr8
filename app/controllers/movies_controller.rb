@@ -55,11 +55,17 @@ class MoviesController < ApplicationController
       @backdrop = Movie.image("backdrops", @movie.id, "w1280")
       @cast = Movie.define("movie", "cast", @movie.id)
       @directors = Movie.define("movie", "director", @movie.id)
+      reviews = Review.where(:movie_id => @movie.id)
+      @comments = reviews.where.not(content: nil)
+      @rating = Review.rating(@movie.id)
   end
 
   private
     def set_movie
       @movie = Movie.define("movie", "detail", params[:id].to_i)
+      if @movie.nil?
+        redirect_to movie_path(71481)
+      end
     end
 
     def set_now_playing

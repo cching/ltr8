@@ -16,6 +16,26 @@ input.valid:not([type]), input.valid:not([type]):focus, input[type=text].valid:n
 	box-shadow: 0 1px 0 0 #64aff4 !important;
 }
 
+input#review_rate:not([type]), input#review_rate[type=text]:not(.browser-default), input#review_rate[type=password]:not(.browser-default), input#review_rate[type=email]:not(.browser-default), input#review_rate[type=url]:not(.browser-default), input#review_rate[type=time]:not(.browser-default), input#review_rate[type=date]:not(.browser-default), input#review_rate[type=datetime]:not(.browser-default), input#review_rate[type=datetime-local]:not(.browser-default), input#review_rate[type=tel]:not(.browser-default), input#review_rate[type=number]:not(.browser-default), input#review_rate[type=search]:not(.browser-default), textarea#review_rate.materialize-textarea {
+
+	font-size:0px !important;
+	border-bottom: none !important;
+
+}
+
+input#review_rate:not([type]):focus:not([readonly]), input#review_rate[type=text]:not(.browser-default):focus:not([readonly]), input#review_rate[type=password]:not(.browser-default):focus:not([readonly]), input#review_rate[type=email]:not(.browser-default):focus:not([readonly]), input#review_rate[type=url]:not(.browser-default):focus:not([readonly]), input#review_rate[type=time]:not(.browser-default):focus:not([readonly]), input#review_rate[type=date]:not(.browser-default):focus:not([readonly]), input#review_rate[type=datetime]:not(.browser-default):focus:not([readonly]), input#review_rate[type=datetime-local]:not(.browser-default):focus:not([readonly]), input#review_rate[type=tel]:not(.browser-default):focus:not([readonly]), input#review_rate[type=number]:not(.browser-default):focus:not([readonly]), input#review_rate[type=search]:not(.browser-default):focus:not([readonly]), textarea#review_rate.materialize-textarea:focus:not([readonly]) {
+	border-bottom: none !important;
+	box-shadow: none !important;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+
 .dropdown-content li > a, .dropdown-content li > span {
 	color:#64aff4 !important; 
 }

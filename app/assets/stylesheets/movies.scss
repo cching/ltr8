@@ -122,10 +122,16 @@
 	bottom:25px;
 }
 
+.movie_average_rating {
+	position:absolute;
+	left:-25px;
+	bottom:12px;
+}
+
 .show_movie_block {
 	position:relative;
 	margin: 30px 30px 30px 30px;
-	height: 350px;
+	height: 390px;
 	width: 97%;
 	background-color:#fff;
 }
@@ -171,8 +177,26 @@
 	position:absolute;
 	font-size:1.2em;
 	height:100%;
-	right: 50px;
+	right: 30px;
 	top:45px;
+}
+
+.show_movie_rating {
+	position:absolute;
+	bottom: 40px;
+	left: -23px;
+}
+
+.show_movie_new_review {
+	position:absolute;
+	bottom: 60px;
+	right: 30px;
+}
+
+.show_movie_submit {
+	position:absolute;
+	bottom: 10px;
+	right: 60px;
 }
 
 .show_movie_title {
