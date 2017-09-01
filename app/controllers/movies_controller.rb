@@ -27,17 +27,15 @@ class MoviesController < ApplicationController
   end
 
   def search
-    
     # Tmdb API does not allow mixed queries between titles and release date/title name/date, eg a title can't be inputted and then sorted remotely
     # two separate Tmdb methods must be used (Tmdb::Discover & Tmdb::Search)
-
     if Movie.params_exist(params[:title])
       # sort by title if params exist
       @movies = Movie.define("search", "movie", {:page => @page, :language => "en-US", :region => "US"}, params[:title])
       # no sql query, params only sent to Tmdb API, no risk of local injection from user input
-    elsif Movie.params_exist(params[:movie]) || form_params.map { |x| Movie.params_exist(params[x.to_sym]) }.any?
+    elsif Movie.params_exist(params[:movie]) || @form_params.map { |x| Movie.params_exist(params[x.to_sym]) }.any?
       # sort by genre or release date/title name if params exist
-      form_params.map{ |x| @sort = params[x.to_sym] unless params[x.to_sym].empty? }
+      @form_params.map{ |x| @sort = params[x.to_sym] unless params[x.to_sym].empty? }
       params_hash = {:sort_by => @sort, :with_genres => "#{params[:movie][:genre_id].to_i unless params[:movie].nil?}", :language => "en-US", :region => "US", :page => @page}
       @movies = Movie.define("discover", "movie", params_hash)
     elsif Movie.params_exist(params[:category])
